@@ -8,6 +8,14 @@ import java.util.Scanner;
  */
 public class TooLargeTooSmall {
 
+    static int tries = 0;
+    private int player1Number,enteredNumber, lastNumber;
+
+
+    public TooLargeTooSmall(){
+        System.out.print("Player 1, Gimme A Number: ");
+        this.player1Number=getANumber();
+    }
     public static int getANumber(){
         Scanner scanner = new Scanner(System.in);
         int ans;
@@ -19,37 +27,30 @@ public class TooLargeTooSmall {
         }
         return ans;
     }
-    public static void guessTheNumber(){
-        System.out.print("Player 1, Gimme A Number: ");
-        int i = getANumber();
-        int tries = 0, enteredNumber, lastNumber=Integer.MIN_VALUE;
-
-        do {
+    public void guessTheNumber(){
             System.out.print("Guess Player 1's Number: ");
             enteredNumber = getANumber();
 
-            if(enteredNumber>i){
+            if(enteredNumber>player1Number){
                 System.out.println("Too Large");
                 if(lastNumber!=enteredNumber)tries++;
-            }else if (enteredNumber<i){
+            }else if (enteredNumber<player1Number){
                 System.out.println("Too Small");
                 if(lastNumber!=enteredNumber)tries++;
             }else {
                 System.out.println("You tried " + tries + " times!");
-                return;
             }
 
-            lastNumber=enteredNumber;
-        }while (enteredNumber != i);
-        System.out.println("Fail?");
-        return;
+            this.lastNumber=this.enteredNumber;
+            return;
     }
 
     public static void main(String[] args) {
+    TooLargeTooSmall game = new TooLargeTooSmall();
 
-
-        guessTheNumber();
-
+    do {
+        game.guessTheNumber();
+    }while (game.enteredNumber != game.player1Number);
 
     }
 }
