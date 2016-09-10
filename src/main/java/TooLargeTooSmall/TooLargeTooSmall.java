@@ -26,7 +26,7 @@ public class TooLargeTooSmall {
         }
         return ans;
     }
-    public void guessTheNumber(int guess){
+    public boolean guessTheNumber(int guess){
             enteredNumber = guess;
 
             if(enteredNumber>player1Number){
@@ -37,10 +37,11 @@ public class TooLargeTooSmall {
                 if(lastNumber!=enteredNumber)tries++;
             }else {
                 System.out.println("You tried " + tries + " times!");
+                return true;
             }
 
             this.lastNumber=this.enteredNumber;
-            return;
+            return false;
     }
 
     public static void main(String[] args) {
@@ -49,8 +50,7 @@ public class TooLargeTooSmall {
 
     do {
         System.out.print("Guess Player 1's Number: ");
-        game.guessTheNumber(getANumber());
-    }while (game.enteredNumber != game.player1Number);
+    }while (!game.guessTheNumber(getANumber()));
 
     }
 }
