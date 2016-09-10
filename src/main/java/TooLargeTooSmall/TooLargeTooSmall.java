@@ -8,13 +8,12 @@ import java.util.Scanner;
  */
 public class TooLargeTooSmall {
 
-    static int tries = 0;
+    static int tries = 1;
     private int player1Number,enteredNumber, lastNumber;
 
 
-    public TooLargeTooSmall(){
-        System.out.print("Player 1, Gimme A Number: ");
-        this.player1Number=getANumber();
+    public TooLargeTooSmall(int player1Number){
+        this.player1Number=player1Number;
     }
     public static int getANumber(){
         Scanner scanner = new Scanner(System.in);
@@ -27,9 +26,8 @@ public class TooLargeTooSmall {
         }
         return ans;
     }
-    public void guessTheNumber(){
-            System.out.print("Guess Player 1's Number: ");
-            enteredNumber = getANumber();
+    public void guessTheNumber(int guess){
+            enteredNumber = guess;
 
             if(enteredNumber>player1Number){
                 System.out.println("Too Large");
@@ -46,10 +44,12 @@ public class TooLargeTooSmall {
     }
 
     public static void main(String[] args) {
-    TooLargeTooSmall game = new TooLargeTooSmall();
+        System.out.print("Player 1, Gimme a Number: ");
+    TooLargeTooSmall game = new TooLargeTooSmall(getANumber());
 
     do {
-        game.guessTheNumber();
+        System.out.print("Guess Player 1's Number: ");
+        game.guessTheNumber(getANumber());
     }while (game.enteredNumber != game.player1Number);
 
     }
